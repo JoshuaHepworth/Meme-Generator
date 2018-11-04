@@ -5,11 +5,11 @@ const cors = require('cors')
 const sesssion = require('express-session')
 
 require('./db/db')
-app.use(session({
-	secret: 'memes dopeness',
-	resave: false,
-	saveUninitialized: false
-}))
+// app.use(session({
+// 	secret: 'memes dopeness',
+// 	resave: false,
+// 	saveUninitialized: false
+// }))
 
 //MIDDLEWARE
 app.use(bodyParser.urlencoded({extended: false}))
@@ -28,6 +28,6 @@ const memeController = require('./controllers/memeController')
 
 app.use('/api/v1/memes', memeController);
 
-app.listen(process.env.PORT ||| 5000, () => {
+app.listen(process.env.PORT || 5000, () => {
 	console.log('listening on port 5000')
 })
