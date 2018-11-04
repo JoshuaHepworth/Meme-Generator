@@ -6,7 +6,7 @@ const memeSchema = new mongoose.Schema({
 	topText: String,
 	bottomText: String,
 	// user: [User.schema],
-	// imgUrl: String,
+	imgUrl: [String],
 	// imgId:
 	//channel:
 	//createdDate:
