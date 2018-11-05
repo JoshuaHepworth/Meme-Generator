@@ -34,6 +34,7 @@ const authController  = require('./controllers/authController')
 app.use('/api/v1/images', imageController);
 app.use('/auth', authController);
 app.use('/api/v1/memes', memeController);
+app.use('/api/v1/user', userController);
 
 app.listen(process.env.PORT || 5000, () => {
 	console.log('listening on port 5000')
