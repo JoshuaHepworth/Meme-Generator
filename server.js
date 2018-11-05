@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const sesssion = require('express-session')
+const User = require('./models/user')
+const Meme = require('./models/meme')
 
 require('./db/db')
 // app.use(session({

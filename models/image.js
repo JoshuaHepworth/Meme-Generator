@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const imageSchema = new mongoose.Schema({
 	// user: [User.schema],
 	imgUrl: [String],
-	// imgId:
+	apiId: {type: String, unique: true}
 	//channel:
 	//createdDate:
 })

@@ -4,6 +4,10 @@ const router = express.Router();
 
 const Meme = require('../models/meme');
 
+const User = require('../models/user');
+
+
+//INDEX ROUTE
 router.get('/', async (req, res, next) => {
   try {
   	const allMemes = await Meme.find();
@@ -16,6 +20,7 @@ router.get('/', async (req, res, next) => {
   }
 	    
 }) 
+
 
 router.post('/', async (req, res) => {
 	
