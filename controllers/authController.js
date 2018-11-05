@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const session = require('express-session')
 const User = require('../models/user')
 
 router.post('/', async (req, res) => {
@@ -9,7 +10,7 @@ router.post('/', async (req, res) => {
 		const user = await User.create(req.body)
 		req.session.logged = true;
 		req.session.username = req.body.username;
-
+		console.log(session)
 		res.json({
 			status: 200,
 			data: 'login successful'
