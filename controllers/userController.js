@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
 
         console.log(e)
     }
-	    
-})
+
 
 module.exports = router
+
