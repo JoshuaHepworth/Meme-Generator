@@ -6,10 +6,27 @@ const Meme = require('../models/meme');
 
 const User = require('../models/user');
 
+const Image = require('../models/image');
+
+const mgUserName = 'aprudhomme';
+const mgPassword = 'Jaglax19';
+const apiKey = '53ab19f9-5502-408b-b645-284c4394a5a9';
+
 
 //INDEX ROUTE
 router.get('/', async (req, res, next) => {
   try {
+  	const images = await fetch('http://version1.api.memegenerator.net//Generators_Select_ByPopular?pageIndex=0&pageSize=25&days=14&apiKey=' + apiKey);
+	
+	const parsedImages = await images.json();
+
+	const mappedImages = parsedImages.map((image) => {
+		return {
+			imgUrl: image.result.imageUrl
+		}
+	})
+
+	const createdImages = await Image.create(mappedImages)
   	const allMemes = await Meme.find();
   	res.json({
   		status: 200,
