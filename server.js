@@ -30,8 +30,9 @@ const userController = require('./controllers/userController')
 const memeController = require('./controllers/memeController')
 const imageController = require('./controllers/imageController')
 
-app.use('/api/v1/memes', memeController);
 app.use('/api/v1/images', imageController);
+
+app.use('/api/v1/memes', memeController);
 
 app.listen(process.env.PORT || 5000, () => {
 	console.log('listening on port 5000')
