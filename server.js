@@ -26,10 +26,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 //CONTROLLERS
-const userController = require('./controllers/userController')
-const memeController = require('./controllers/memeController')
+const userController  = require('./controllers/userController')
+const memeController  = require('./controllers/memeController')
 const imageController = require('./controllers/imageController')
-const authController = require('./controllers/authController')
+const authController  = require('./controllers/authController')
 
 app.use('/api/v1/images', imageController);
 app.use('/auth', authController);
