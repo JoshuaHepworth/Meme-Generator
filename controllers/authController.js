@@ -7,14 +7,14 @@ const User = require('../models/user');
 router.get('/', async (req, res) => {
 	try {
 		console.log(req.session.ID, 'can get ID');
-		const foundUser = await User.findOne({username: req.session.username});
+		const foundUser = await User.findById(req.session.ID);
 		console.log(foundUser, 'found him');
 		res.json({
 			status: 200,
 			data: foundUser
 		})
 	} catch (err) {
-		res.send(err)
+		console.log(err)
 	}
 })
 
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
 		console.log(user, 'here is the user')
 		req.session.logged = true;
 		// req.session.username = req.body.username;
-		console.log(req.session.body.username)
+		console.log(session.body.username)
 		console.log(req.session.logged, '<--logged?');
 		req.session.username = user.username;
 		req.session.ID = user._id;
@@ -51,4 +51,5 @@ router.post('/', async (req, res) => {
 // 		}
 // 	})
 // =======
+
 module.exports = router;

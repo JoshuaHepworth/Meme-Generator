@@ -10,7 +10,7 @@ const session = require('express-session')
 		
 		// console.log(foundUser, 'this is the user');
 // route to user profile page
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
     try {
     console.log(req.session.username);
 		const foundUser = await User.findById(req.session.ID)
@@ -25,4 +25,6 @@ router.get('/', async (req, res, next) => {
         console.log(err)
     }
 })
+
+// post rt to create
 module.exports = router
