@@ -43,7 +43,8 @@ router.post('/', async (req, res) => {
 	
 	try {
 		const createdMeme = await Meme.create(req.body);
-		const foundUser = await User.findById(req.body);
+		const foundUser = await User.findOne(req.session.username);
+		console.log(foundUser)
 		res.json({
 			status: 200,
 			data: createdMeme, foundUser

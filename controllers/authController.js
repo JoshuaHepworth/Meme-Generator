@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
 		const user = await User.create(req.body)
 		req.session.logged = true;
 		req.session.username = req.body.username;
-		console.log(session)
+		console.log(session.body.username)
 		res.json({
 			status: 200,
 			data: 'login successful'
@@ -19,5 +19,11 @@ router.post('/', async (req, res) => {
 		console.log(err)
 	}
 });
+
+router.get('/logout', (req, res) => {
+	req.session.destroy((err) => {
+		if(err) res.send(err);
+		}
+	})
 
 module.exports = router;
