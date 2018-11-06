@@ -6,20 +6,18 @@ const User = require('../models/user')
 const session = require('express-session')
 
 // route to user profile page
-router.get('/', async (req, res, next) => {
-    try {
-    	console.log(req.session.username);
-		const foundUser = await User.findById(req.session.ID)
-		console.log(foundUser, '<--found the user');
+router.get('/', async (req, res) => {
+	try {
+		console.log(req.session.ID, 'can get ID');
+		const foundUser = await User.findById(req.session.ID);
+		console.log(foundUser, 'found him');
 		res.json({
 			status: 200,
 			data: foundUser
 		})
-
-    } catch(e){
-
-        console.log(e)
-    }
+	} catch (err) {
+		res.send(err)
+	}
 })
 
 module.exports = router
