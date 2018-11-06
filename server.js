@@ -32,7 +32,6 @@ const imageController = require('./controllers/imageController')
 const authController  = require('./controllers/authController')
 
 app.use('/api/v1/images', imageController);
-app.use('/api/v1/user', userController);
 app.use('/auth', authController);
 app.use('/api/v1/memes', memeController);
 app.use('/api/v1/user', userController);
