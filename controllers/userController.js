@@ -8,8 +8,8 @@ const session = require('express-session')
 // route to user profile page
 router.get('/', async (req, res) => {
 	try {
-		console.log(req.session.username, 'can get username');
-		const foundUser = await User.findOne({username: 'test test'});
+		console.log(req.session.username);
+		const foundUser = await User.findOne({username: req.session.username});
 		console.log(foundUser, 'found him');
 		res.json({
 			status: 200,

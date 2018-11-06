@@ -43,9 +43,13 @@ router.post('/', async (req, res) => {
 	
 	try {
 		const createdMeme = await Meme.create(req.body);
+		console.log(req.body, '<----request body');
 
 		const foundUser = await User.findOne(req.session.username);
-
+		await createdMeme.save()
+		console.log(createdMeme, '<---created mememeh');
+		const foundMemes = await Meme.find({})
+		console.log(foundMemes, 'ALL THE MEMES');
 
 		res.json({
 			status: 200,
