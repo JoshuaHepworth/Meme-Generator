@@ -4,13 +4,8 @@ const User = require('./user')
 const memeSchema = new mongoose.Schema({
 	upvotes: Number,
 	downvotes: Number,
-	topText: String,
-	bottomText: String,
-	imgUrl: [String],
-	// users: [User.schema]
-	// imgId:
-	//channel:
-	//createdDate:
+	imgUrl: String,
+	user: User.schema
 })
 
 module.exports = mongoose.model('Meme', memeSchema)

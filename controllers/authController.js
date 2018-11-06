@@ -36,16 +36,22 @@ router.post('/', async (req, res) => {
 		console.log(req.session.logged, '<--logged?');
 		req.session.username = user.username;
 		req.session.ID = user._id;
+		await user.save();
+		await req.session.save();
+
 		console.log(req.session.username, '<--username?');
 		console.log(req.session.ID, '<---ID');
 		// user.save();
 		await user.save();
+
 		console.log(user, 'stupid fucking user');
 		console.log(req.session, 'goddamn session');
+
 		res.json({
 			status: 200,
 			data: user
 		});
+
 	} catch(err){
 		console.log(err)
 	}
