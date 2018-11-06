@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
 		console.log(user, 'here is the user')
 		req.session.logged = true;
 		// req.session.username = req.body.username;
-		
+
 
 
 		// req.session.username = req.body.username;
@@ -38,7 +38,6 @@ router.post('/', async (req, res) => {
 		req.session.ID = user._id;
 		await user.save();
 		await req.session.save();
-
 		console.log(user, 'stupid fucking user');
 		console.log(req.session, 'goddamn session');
 
@@ -53,12 +52,22 @@ router.post('/', async (req, res) => {
 
 });
 
-router.get('/', (req, res) => {
+router.get('/logout', async (req, res) => {
+	console.log(req.session.logged);
+	const foundUser = await User.findById(req.session.ID)
 	req.session.destroy((err) => {
 		if(err){
 			console.log(err)
+		} else {
+			res.json({
+				status: 200
+				// data: foundUser
+
+			})
 		}
 	})
+	// req.session.destroy();
+	// res.json({status: 200});
 })
 
 
