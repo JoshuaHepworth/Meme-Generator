@@ -16,7 +16,7 @@ const apiKey = '53ab19f9-5502-408b-b645-284c4394a5a9';
 //INDEX ROUTE
 router.get('/', async (req, res, next) => {
   try {
-
+  	console.log(req.session, 'MEMES ROUTE---------------')
   	const allMemes = await Meme.find({'user._id': req.session.ID});
   	res.json({
   		status: 200,

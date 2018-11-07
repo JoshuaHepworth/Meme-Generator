@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
 		console.log(user, 'here is the user')
 
 		req.session.logged = true;
-		// req.session.username = req.body.username;
+		req.session.username = req.body.username;
 		if(user){
 		   if(bcrypt.compareSync(req.body.password, user.password)){
           req.session.logged = true;
@@ -38,8 +38,6 @@ router.post('/', async (req, res) => {
         }
 
 }
-
-
 		// req.session.username = req.body.username;
 		// console.log(session.body.username)
 		req.session.username = user.username;
@@ -58,13 +56,14 @@ router.post('/', async (req, res) => {
 
 });
 
+
+
 router.post('/register', async (req, res) => {
   try {
+
   	const password = req.body.password
   	const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-    const foundUser = await User.findOne({
-    	username: req.body.username
-    })
+    const foundUser = await User.findById(req.session.ID)
     const userEntry = {};
     userEntry.username = req.body.username;
     userEntry.password = passwordHash
@@ -74,6 +73,10 @@ router.post('/register', async (req, res) => {
     req.session.username = req.body.username;
     req.session.logged = true;
     req.session.message = ''
+    req.session.ID = user._id;
+    console.log(user._id, 'USER ID-----------------------')
+    await user.save();
+		await req.session.save();
     res.json({
     	status: 200,
     	data: foundUser
@@ -92,15 +95,15 @@ router.post('/register', async (req, res) => {
 })
 // THIS LOGS USER OUT
 router.get('/logout', async (req, res) => {
-	// const foundUser = await User.findById(req.session.ID)
+	const foundUser = await User.findById(req.session.ID)
 
 	req.session.destroy((err) => {
 		if(err){
 			console.log(err)
 		} else {
 			res.json({
-				status: 200
-				// data: foundUser
+				status: 200,
+				data: foundUser
 
 			})
 		}
