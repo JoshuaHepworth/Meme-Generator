@@ -6,9 +6,7 @@ const User = require('../models/user');
 
 router.get('/', async (req, res) => {
 	try {
-		console.log(req.session.ID, 'can get ID');
 		const foundUser = await User.findById(req.session.ID);
-		console.log(foundUser, 'found him');
 		res.json({
 			status: 200,
 			data: foundUser
@@ -21,11 +19,9 @@ router.get('/', async (req, res) => {
 
 
 router.post('/', async (req, res) => {
-	console.log(req.session, 'this is the session')
 
 	try {
 		const user = await User.create(req.body)
-		console.log(user, 'here is the user')
 		req.session.logged = true;
 		// req.session.username = req.body.username;
 
@@ -33,13 +29,10 @@ router.post('/', async (req, res) => {
 
 		// req.session.username = req.body.username;
 		// console.log(session.body.username)
-		console.log(req.session.logged, '<--logged?');
 		req.session.username = user.username;
 		req.session.ID = user._id;
 		await user.save();
 		await req.session.save();
-		console.log(user, 'stupid fucking user');
-		console.log(req.session, 'goddamn session');
 
 		res.json({
 			status: 200,
@@ -53,7 +46,6 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/logout', async (req, res) => {
-	console.log(req.session.logged);
 	const foundUser = await User.findById(req.session.ID)
 	req.session.destroy((err) => {
 		if(err){

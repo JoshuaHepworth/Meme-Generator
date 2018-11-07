@@ -16,22 +16,13 @@ const apiKey = '53ab19f9-5502-408b-b645-284c4394a5a9';
 //INDEX ROUTE
 router.get('/', async (req, res, next) => {
   try {
- //  const images = await fetch('http://version1.api.memegenerator.net//Generators_Select_ByPopular?pageIndex=0&pageSize=25&days=14&apiKey=' + apiKey);
-	
-	// const parsedImages = await images.json();
 
-	// const mappedImages = parsedImages.map((image) => {
-	// 	return {
-	// 		imgUrl: image.result.imageUrl
-	// 	}
-	// })
-
-	// const createdImages = await Image.create(mappedImages)
   	const allMemes = await Meme.find({'user._id': req.session.ID});
   	res.json({
   		status: 200,
   		data: allMemes
   	})
+  	console.log(allMemes, '<--user memes');
   } catch(e){
       
   }
@@ -43,13 +34,11 @@ router.post('/', async (req, res) => {
 	
 	try {
 		const createdMeme = await Meme.create(req.body);
-		console.log(req.body, '<----request body');
 
 		const foundUser = await User.findOne(req.session.username);
 		await createdMeme.save()
-		console.log(createdMeme, '<---created mememeh');
+		console.log(createdMeme, '<-- created meme');
 		const foundMemes = await Meme.find({})
-		console.log(foundMemes, 'ALL THE MEMES');
 
 		res.json({
 			status: 200,
@@ -62,7 +51,8 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-  	const foundMeme = await Meme.findbyId(req.params.id);
+  	const foundMeme = Meme.findbyId(req.body.id);
+  	console.log(foundMeme, 'found this meme');
   	res.json({
   		status: 200,
   		data: foundMeme
@@ -80,6 +70,7 @@ router.put('/:id', async (req, res) => {
 			status: 200,
 			data: updatedMeme
 		})
+		console.log(updatedMeme, 'the updated meme');
 	} catch(err){
 		res.send(err)
 	}
