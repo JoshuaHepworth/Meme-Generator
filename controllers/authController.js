@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
 		console.log(user, 'here is the user')
 		req.session.logged = true;
 		// req.session.username = req.body.username;
-		// console.log(session.body.username)
+
 
 
 		// req.session.username = req.body.username;
@@ -38,12 +38,6 @@ router.post('/', async (req, res) => {
 		req.session.ID = user._id;
 		await user.save();
 		await req.session.save();
-
-		console.log(req.session.username, '<--username?');
-		console.log(req.session.ID, '<---ID');
-		// user.save();
-		await user.save();
-
 		console.log(user, 'stupid fucking user');
 		console.log(req.session, 'goddamn session');
 
