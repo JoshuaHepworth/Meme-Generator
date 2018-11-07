@@ -57,10 +57,10 @@ router.post('/', async (req, res) => {
 	}
 
 });
-
+// THIS LOGS USER OUT
 router.get('/logout', async (req, res) => {
-	console.log(req.session.logged);
-	const foundUser = await User.findById(req.session.ID)
+	console.log(req.session, 'THIS IS THE SESSION NOW');
+	// const foundUser = await User.findById(req.session.ID)
 	req.session.destroy((err) => {
 		if(err){
 			console.log(err)
@@ -72,8 +72,6 @@ router.get('/logout', async (req, res) => {
 			})
 		}
 	})
-	// req.session.destroy();
-	// res.json({status: 200});
 })
 
 
