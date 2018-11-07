@@ -7,7 +7,8 @@ const session = require('express-session')
 
 router.get('/', async (req, res) => {
 	try {
-		const foundUser = await User.findOne({username: req.session.username});
+		const foundUser = await User.findById(req.session.ID);
+		console.log(foundUser);
 
 		res.json({
 			status: 200,

@@ -78,6 +78,8 @@ router.post('/register', async (req, res) => {
     	status: 200,
     	data: foundUser
     })
+    req.session.save();
+    user.save();
     console.log('register')
     console.log(req.session.logged, '<--logged?');
     console.log(req.session, '<--session');
