@@ -29,6 +29,21 @@ router.get('/', async (req, res, next) => {
 	    
 }) 
 
+router.get('/profile/:id', async (req, res) => {
+	console.log('user profile route hitting');
+	console.log(req.params.id, '<---here is the ID');
+	const idToUse = req.params.id
+	try {
+		const userMemes = await Meme.find({'user._id': req.params.id});
+		res.json({
+			status: 200,
+			data: userMemes
+		})
+		console.log(userMemes, '<---Users memes');
+	} catch (err) {
+		
+	}
+})
 
 router.post('/', async (req, res) => {
 	
