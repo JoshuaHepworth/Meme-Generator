@@ -29,6 +29,21 @@ router.get('/', async (req, res, next) => {
 	    
 }) 
 
+router.get('/profile/:id', async (req, res) => {
+	console.log('user profile route hitting');
+	console.log(req.params.id, '<---here is the ID');
+	const idToUse = req.params.id
+	try {
+		const userMemes = await Meme.find({'user._id': req.params.id});
+		res.json({
+			status: 200,
+			data: userMemes
+		})
+		console.log(userMemes, '<---Users memes');
+	} catch (err) {
+		
+	}
+})
 
 router.post('/', async (req, res) => {
 	
@@ -49,6 +64,22 @@ router.post('/', async (req, res) => {
 	}
 })
 
+router.get('/popular', async (req, res) => {
+	try {
+		const popularMemes = await Meme.find({'upvotes': {$gt: 20}});
+		console.log(popularMemes);
+		res.json({
+			status: 200,
+			data: popularMemes
+		})
+	} catch (err) {
+		res.json({
+			status: 404,
+			message: 'error',
+			error: err
+		})
+	}
+})
 router.get('/:id', async (req, res, next) => {
   try {
   	const foundMeme = Meme.findbyId(req.body.id);
@@ -75,6 +106,7 @@ router.put('/:id', async (req, res) => {
 		res.send(err)
 	}
 })
+
 
 router.delete('/:id', async	(req, res) => {
 	try {

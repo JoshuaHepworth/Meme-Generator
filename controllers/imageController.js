@@ -17,7 +17,7 @@ const apiKey = '53ab19f9-5502-408b-b645-284c4394a5a9';
 
 router.get('/', async (req, res) => {
 	try {
-		const images = await request.get('http://version1.api.memegenerator.net//Generators_Select_ByPopular?pageIndex=0&pageSize=25&days=14&apiKey=53ab19f9-5502-408b-b645-284c4394a5a9');
+		const images = await request.get('http://version1.api.memegenerator.net//Generators_Select_ByPopular?pageIndex=0&pageSize=25&days=7&apiKey=53ab19f9-5502-408b-b645-284c4394a5a9');
 		// console.log('hey');
 		const imageJSON = JSON.parse(images.text);
 		// res.send(imageJSON.result)
@@ -32,5 +32,7 @@ router.get('/', async (req, res) => {
 	
 
 })
+
+router.get('/:')
 
 module.exports = router;
