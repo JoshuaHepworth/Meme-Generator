@@ -6,7 +6,8 @@ const memeSchema = new mongoose.Schema({
 	downvotes: Number,
 	imgUrl: String,
 	user: User.schema,
-	channel: String
+	channel: String,
+	score: (this.upvotes - this.downvotes)/(this.upvotes + this.downvotes)
 })
 
 module.exports = mongoose.model('Meme', memeSchema)
