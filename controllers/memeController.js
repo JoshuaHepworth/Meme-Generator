@@ -64,6 +64,22 @@ router.post('/', async (req, res) => {
 	}
 })
 
+router.get('/popular', async (req, res) => {
+	try {
+		const popularMemes = await Meme.find({'upvotes': {$gt: 20}});
+		console.log(popularMemes);
+		res.json({
+			status: 200,
+			data: popularMemes
+		})
+	} catch (err) {
+		res.json({
+			status: 404,
+			message: 'error',
+			error: err
+		})
+	}
+})
 router.get('/:id', async (req, res, next) => {
   try {
   	const foundMeme = Meme.findbyId(req.body.id);
@@ -90,6 +106,7 @@ router.put('/:id', async (req, res) => {
 		res.send(err)
 	}
 })
+
 
 router.delete('/:id', async	(req, res) => {
 	try {
