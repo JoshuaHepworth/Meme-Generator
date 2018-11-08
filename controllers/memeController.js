@@ -66,7 +66,7 @@ router.post('/', async (req, res) => {
 
 router.get('/popular', async (req, res) => {
 	try {
-		const popularMemes = await Meme.find({'upvotes': {$gt: 20}});
+		const popularMemes = await Meme.find({'upvotes': {$gt: 5}});
 		console.log(popularMemes);
 		res.json({
 			status: 200,
