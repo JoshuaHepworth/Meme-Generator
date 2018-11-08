@@ -6,6 +6,8 @@ const User = require('./models/user')
 const Meme = require('./models/meme')
 const Image = require('./models/image')
 const session = require('express-session')
+require('dotenv').config();
+
 
 require('./db/db')
 app.use(session({
