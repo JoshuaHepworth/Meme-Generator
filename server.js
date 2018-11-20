@@ -26,8 +26,7 @@ app.use(bodyParser.json())
 const corsOptions = {
 	origin: originRoute,
 	credentials: true,
-	optionsSuccessStatus: 200,
-	Access-Cotnrol-Allow-Origin
+	optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions));
 app.use(function(req, res, next) {
