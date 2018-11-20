@@ -8,11 +8,21 @@ const User = require('../models/user');
 router.get('/', async (req, res) => {
 	try {
 		const foundUser = await User.findById(req.session.ID);
-		res.json({
-			status: 200,
-			data: foundUser
-		})
+		if(foundUser){
+			res.json({
+				status: 200,
+				data: foundUser,
+				message: 'is logged in'
+			})
+		} else {
+			res.json({
+				message: 'not found'
+			})
+		}
 	} catch (err) {
+		res.json({
+			message: 'not found'
+		})
 		console.log(err)
 	}
 })
