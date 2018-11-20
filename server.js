@@ -7,7 +7,7 @@ const Meme = require('./models/meme')
 const Image = require('./models/image')
 const session = require('express-session')
 
-const originRoute = 'http://localhost:3000' || 'https://react-dank-meme.herokuapp.com'
+const originRoute = 'https://react-dank-meme.herokuapp.com' || 'http://localhost:3000'
 
 require('dotenv').config();
 
