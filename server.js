@@ -26,12 +26,12 @@ app.use(bodyParser.json())
 const corsOptions = {
 	origin: originRoute,
 	credentials: true,
-	optionsSuccessStatus: 200
+	optionsSuccessStatus: 200,
+	Access-Cotnrol-Allow-Origin
 }
 app.use(cors(corsOptions));
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Origin", originRoute);
   next();
 });
 
