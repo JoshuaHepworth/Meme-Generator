@@ -14,7 +14,6 @@ const apiKey = process.env.API_KEY;
 //INDEX ROUTE
 router.get('/', async (req, res, next) => {
   try {
-  	console.log(req.session, 'MEMES ROUTE---------------')
   	const allMemes = await Meme.find({'user._id': req.session.ID});
   	res.json({
   		status: 200,
@@ -28,8 +27,7 @@ router.get('/', async (req, res, next) => {
 }) 
 
 router.get('/profile/:id', async (req, res) => {
-	console.log('user profile route hitting');
-	console.log(req.params.id, '<---here is the ID');
+
 	const idToUse = req.params.id
 	try {
 		const userMemes = await Meme.find({'user._id': req.params.id});
@@ -37,7 +35,7 @@ router.get('/profile/:id', async (req, res) => {
 			status: 200,
 			data: userMemes
 		})
-		console.log(userMemes, '<---Users memes');
+
 	} catch (err) {
 		
 	}
@@ -46,16 +44,17 @@ router.get('/profile/:id', async (req, res) => {
 router.post('/', async (req, res) => {
 	
 	try {
+		console.log('post route hitting');
+		console.log(req.body, '<--request body');
 		const createdMeme = await Meme.create(req.body);
-
-		const foundUser = await User.findOne(req.session.username);
+		
 		await createdMeme.save()
 		console.log(createdMeme, '<-- created meme');
 		const foundMemes = await Meme.find({})
 
 		res.json({
 			status: 200,
-			data: createdMeme, foundUser
+			data: createdMeme
 		})
 	} catch (err){
 		res.send(err)
@@ -99,7 +98,7 @@ router.put('/:id', async (req, res) => {
 			status: 200,
 			data: updatedMeme
 		})
-		console.log(updatedMeme, 'the updated meme');
+
 	} catch(err){
 		res.send(err)
 	}

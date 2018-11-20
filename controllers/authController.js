@@ -32,26 +32,30 @@ router.post('/', async (req, res) => {
           req.session.logged = true;
           req.session.username = req.body.username;
           req.session.password = req.body.password;
-        } else {
+          req.session.message = 'Success'
+       		} else {
               req.session.message = 'Username or Password is Wrong';
       
-        }
+        	}
 
-}
-		// req.session.username = req.body.username;
-		// console.log(session.body.username)
+		} else if(!user) {
+			req.session.message = 'User does not exist'
+		}
 		req.session.username = user.username;
 		req.session.ID = user._id;
-		// await user.save();
+		await user.save();
 		await req.session.save();
 
 		res.json({
 			status: 200,
-			data: user
+			data: user,
+			message: req.session.message
 		});
 
 	} catch(err){
-		console.log(err)
+		res.json({
+			message: 'Username incorrect'
+		})
 	}
 
 });
@@ -75,14 +79,13 @@ router.post('/register', async (req, res) => {
     req.session.message = ''
     req.session.ID = user._id;
     console.log(user._id, 'USER ID-----------------------')
-    await user.save();
+   		await user.save();
 		await req.session.save();
     res.json({
     	status: 200,
     	data: foundUser
     })
-    req.session.save();
-    user.save();
+    
     console.log('register')
     console.log(req.session.logged, '<--logged?');
     console.log(req.session, '<--session');

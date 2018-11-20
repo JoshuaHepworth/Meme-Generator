@@ -6,6 +6,7 @@ const User = require('./models/user')
 const Meme = require('./models/meme')
 const Image = require('./models/image')
 const session = require('express-session')
+const originRoute = 'http://localhost:3000' || 'https://react-dank-meme.herokuapp.com'
 require('dotenv').config();
 
 
@@ -21,7 +22,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 const corsOptions = {
-	origin: 'http://localhost:3000',
+	origin: originRoute,
 	credentials: true,
 	optionsSuccessStatus: 200
 }

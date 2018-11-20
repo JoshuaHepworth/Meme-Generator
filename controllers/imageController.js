@@ -33,11 +33,11 @@ router.get('/', async (req, res) => {
 
 router.get('/:channel', async (req, res) => {
 	try {
-		console.log('ROUTE HITTING');
+
 		const query = req.params.channel
 		const images = await request.get('http://version1.api.memegenerator.net//Generators_Search?q=' + query + '&pageIndex=0&pageSize=25&apiKey=' + apiKey)
 		const imagesJSON = JSON.parse(images.text);
-		console.log(imagesJSON, 'heres the parsed response');
+	
 		JSON.stringify(imagesJSON);
 		res.json({
 			status: 200,
@@ -47,9 +47,7 @@ router.get('/:channel', async (req, res) => {
 		res.send(err)
 	}
 	
-// fetch end point + 'params channel'
-// fetch localhost /memes/ <---  plug in user search
-// in express, user search would be the search params
+
 })
 
 module.exports = router;
