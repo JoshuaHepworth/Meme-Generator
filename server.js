@@ -6,7 +6,9 @@ const User = require('./models/user')
 const Meme = require('./models/meme')
 const Image = require('./models/image')
 const session = require('express-session')
+
 const originRoute = 'http://localhost:3000' || 'https://react-dank-meme.herokuapp.com'
+
 require('dotenv').config();
 
 
